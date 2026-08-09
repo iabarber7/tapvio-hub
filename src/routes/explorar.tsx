@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import { categoryIcon } from "@/lib/categoryIcons";
+import { cn } from "@/lib/utils";
 
 type ExploreSearch = { categoria?: string | undefined };
 
