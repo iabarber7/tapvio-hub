@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import heroArt from "@/assets/tapvio-hero.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,35 +41,75 @@ function Index() {
       <Header />
 
       <section className="relative overflow-hidden bg-hero-gradient text-navy-foreground">
-        <div className="mx-auto max-w-6xl px-4 py-16 text-center md:py-24">
-          <span className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/20 bg-navy-foreground/10 px-3 py-1 text-xs font-medium">
-            <Nfc size={14} /> {"Conecta. Fideliza. Crece."}
-          </span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl" suppressHydrationWarning>
-            {"Descubre. Valora. Conecta."}
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-base text-navy-foreground/75 md:text-lg">
-            Un toque con tu móvil y ya está. Encuentra los mejores negocios de tu ciudad y comparte
-            tu experiencia en segundos.
-          </p>
+        <div className="pointer-events-none absolute inset-0 bg-grid-faint opacity-60" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/15 bg-navy-foreground/5 px-3 py-1 text-xs font-medium tracking-wide backdrop-blur">
+              <Nfc size={14} className="text-brand-purple" /> Tecnología NFC + QR para negocios
+            </span>
 
-          <div className="mx-auto mt-8 flex max-w-2xl flex-col gap-2 rounded-2xl bg-background p-2 shadow-lift sm:flex-row">
-            <div className="flex flex-1 items-center gap-2 px-3">
-              <Search size={18} className="text-muted-foreground" />
-              <Input
-                placeholder="Busca un restaurante, café, hotel…"
-                className="border-0 px-0 text-foreground shadow-none focus-visible:ring-0"
-              />
+            <h1 className="mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight md:text-7xl">
+              <span className="block">CONECTA.</span>
+              <span className="block text-brand-gradient">VALORA.</span>
+              <span className="block text-brand-gradient">DESCUBRE.</span>
+            </h1>
+
+            <div className="mt-6 h-px w-24 bg-brand-gradient" />
+
+            <p className="mt-6 max-w-md text-base text-navy-foreground/70 md:text-lg">
+              La forma más fácil y elegante de conectar tu negocio con las personas. Sin apps, sin
+              registros: un toque y listo.
+            </p>
+
+            <div className="mt-8 space-y-4">
+              {[
+                { icon: Nfc, title: "TAP", text: "Acerca y conecta al instante." },
+                { icon: Star, title: "VALORA", text: "Recibe reseñas y mejora tu reputación." },
+                { icon: Compass, title: "DESCUBRE", text: "Ofertas, menús, redes y mucho más." },
+              ].map((f) => (
+                <div key={f.title} className="flex items-center gap-4">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-navy-foreground/15 bg-navy-foreground/5">
+                    <f.icon size={18} className="text-brand-purple" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold tracking-wide">{f.title}</p>
+                    <p className="text-sm text-navy-foreground/60">{f.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="hidden items-center gap-2 border-l border-border px-3 text-sm text-muted-foreground sm:flex">
-              <MapPin size={16} /> Las Palmas GC
+
+            <div className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-navy-foreground/10 bg-navy-foreground/5 p-2 backdrop-blur sm:flex-row">
+              <div className="flex flex-1 items-center gap-2 px-3">
+                <Search size={18} className="text-navy-foreground/50" />
+                <Input
+                  placeholder="Busca un restaurante, café, hotel…"
+                  className="border-0 px-0 text-navy-foreground shadow-none placeholder:text-navy-foreground/40 focus-visible:ring-0"
+                />
+              </div>
+              <div className="hidden items-center gap-2 border-l border-navy-foreground/10 px-3 text-sm text-navy-foreground/50 sm:flex">
+                <MapPin size={16} /> Las Palmas GC
+              </div>
+              <Link to="/explorar">
+                <Button className="w-full bg-brand-gradient text-primary-foreground hover:opacity-90 sm:w-auto">
+                  Explorar
+                </Button>
+              </Link>
             </div>
-            <Link to="/explorar">
-              <Button className="w-full sm:w-auto">Buscar</Button>
-            </Link>
+          </div>
+
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-8 rounded-full bg-brand-gradient opacity-25 blur-3xl" />
+            <img
+              src={heroArt.url}
+              alt="Punto NFC de TAPVIO junto a un móvil mostrando el perfil de un negocio"
+              className="relative mx-auto w-full max-w-lg rounded-3xl object-cover"
+              loading="eager"
+            />
           </div>
         </div>
       </section>
+
 
       <main className="mx-auto max-w-6xl px-4">
         <section className="py-12">

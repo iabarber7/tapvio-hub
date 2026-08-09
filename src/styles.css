@@ -62,6 +62,8 @@
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
   --color-star: var(--star);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-blue: var(--brand-blue);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -90,8 +92,11 @@
   --navy: oklch(0.24 0.062 264);
   --navy-foreground: oklch(0.98 0.005 247.9);
   --star: oklch(0.82 0.16 85);
-  --gradient-hero: linear-gradient(135deg, oklch(0.24 0.062 264), oklch(0.4 0.16 264) 55%, oklch(0.55 0.13 216));
-  --gradient-brand: linear-gradient(90deg, oklch(0.554 0.222 263.9), oklch(0.715 0.137 216.4));
+  --brand-blue: oklch(0.62 0.2 255);
+  --brand-purple: oklch(0.55 0.24 297);
+  --gradient-hero: radial-gradient(120% 100% at 15% 0%, oklch(0.28 0.11 285 / 90%) 0%, transparent 60%), radial-gradient(90% 80% at 95% 20%, oklch(0.35 0.14 262 / 70%) 0%, transparent 65%), linear-gradient(160deg, oklch(0.16 0.03 265), oklch(0.11 0.02 265) 60%, oklch(0.09 0.015 265));
+  --gradient-brand: linear-gradient(95deg, var(--brand-blue), var(--brand-purple));
+  --shadow-glow: 0 0 60px -10px oklch(0.55 0.24 297 / 45%), 0 0 120px -30px oklch(0.62 0.2 255 / 45%);
   --shadow-card: 0 1px 2px oklch(0.24 0.062 264 / 6%), 0 8px 24px -12px oklch(0.24 0.062 264 / 18%);
   --shadow-lift: 0 12px 40px -12px oklch(0.24 0.062 264 / 28%);
   --chart-1: oklch(0.554 0.222 263.9);
@@ -186,4 +191,14 @@
 
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
+}
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility bg-grid-faint {
+  background-image: linear-gradient(oklch(1 0 0 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 4%) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
