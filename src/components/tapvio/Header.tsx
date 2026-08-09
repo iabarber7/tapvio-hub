@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User as UserIcon } from "lucide-react";
+import { LogOut, Store, User as UserIcon } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 export function Header() {
@@ -125,6 +125,11 @@ function UserMenu({
         <DropdownMenuItem asChild>
           <Link to="/perfil" search={{ tab: "valoraciones" }}>
             <UserIcon className="mr-2 h-4 w-4" /> Mi perfil
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/business">
+            <Store className="mr-2 h-4 w-4" /> Acceso Business
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onSignOut}>
