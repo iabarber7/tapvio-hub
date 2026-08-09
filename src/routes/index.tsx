@@ -43,8 +43,8 @@ function Index() {
           <span className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/20 bg-navy-foreground/10 px-3 py-1 text-xs font-medium">
             <Nfc size={14} /> {"Conecta. Fideliza. Crece."}
           </span>
-          <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl">
-            Descubre. Valora. Conecta.
+          <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl" suppressHydrationWarning>
+            {"Descubre. Valora. Conecta."}
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-navy-foreground/75 md:text-lg">
             Un toque con tu móvil y ya está. Encuentra los mejores negocios de tu ciudad y comparte
