@@ -125,7 +125,7 @@ export function isOpenNow(
 
 export async function logInteraction(input: {
   business_id: string;
-  device_id?: string | null;
+  device_id?: string | null | undefined;
   source?: string;
   action?: string;
 }) {
