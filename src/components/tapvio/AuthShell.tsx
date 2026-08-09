@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import tapvioLogo from "@/assets/tapvio-logo.png.asset.json";
 
 export function AuthShell({
   title,

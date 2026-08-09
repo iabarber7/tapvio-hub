@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import tapvioMark from "@/assets/tapvio-mark.png.asset.json";
 
 export function Footer() {
   return (
@@ -6,9 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-gradient text-sm font-bold text-primary-foreground">
-              T
-            </span>
+            <img src={tapvioMark.url} alt="TAPVIO" className="h-9 w-9 object-contain" />
             <span className="text-lg font-bold">TAPVIO</span>
           </div>
           <p className="mt-3 max-w-sm text-sm text-navy-foreground/70">
