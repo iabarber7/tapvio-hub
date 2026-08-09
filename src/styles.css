@@ -64,6 +64,10 @@
   --color-star: var(--star);
   --color-brand-purple: var(--brand-purple);
   --color-brand-blue: var(--brand-blue);
+  --color-search: var(--search);
+  --color-search-foreground: var(--search-foreground);
+  --color-search-muted: var(--search-muted);
+  --color-search-border: var(--search-border);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
