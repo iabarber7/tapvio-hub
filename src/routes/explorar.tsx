@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
 
-type ExploreSearch = { categoria?: string };
+type ExploreSearch = { categoria?: string | undefined };
 
 export const Route = createFileRoute("/explorar")({
   validateSearch: (search: Record<string, unknown>): ExploreSearch => ({
