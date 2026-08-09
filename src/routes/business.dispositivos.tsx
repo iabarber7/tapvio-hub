@@ -198,7 +198,7 @@ function DevicesPage() {
                 alt={`Código QR del dispositivo ${qrDevice.code}`}
                 width={240}
                 height={240}
-                className="rounded-xl border border-border bg-white p-3"
+                className="rounded-xl border border-border bg-secondary p-3"
               />
               <p className="break-all text-center text-xs text-muted-foreground">
                 {deviceUrl(qrDevice.code)}
