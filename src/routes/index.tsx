@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import heroArt from "@/assets/tapvio-hero.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
