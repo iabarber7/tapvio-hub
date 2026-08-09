@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as NegocioSlugRouteImport } from './routes/negocio.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const ExplorarRoute = ExplorarRouteImport.update({
   path: '/explorar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NegocioSlugRoute = NegocioSlugRouteImport.update({
+  id: '/negocio/$slug',
+  path: '/negocio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/negocio/$slug': typeof NegocioSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/negocio/$slug': typeof NegocioSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/negocio/$slug': typeof NegocioSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explorar'
+  fullPaths: '/' | '/explorar' | '/negocio/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explorar'
-  id: '__root__' | '/' | '/explorar'
+  to: '/' | '/explorar' | '/negocio/$slug'
+  id: '__root__' | '/' | '/explorar' | '/negocio/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExplorarRoute: typeof ExplorarRoute
+  NegocioSlugRoute: typeof NegocioSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExplorarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/negocio/$slug': {
+      id: '/negocio/$slug'
+      path: '/negocio/$slug'
+      fullPath: '/negocio/$slug'
+      preLoaderRoute: typeof NegocioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExplorarRoute: ExplorarRoute,
+  NegocioSlugRoute: NegocioSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
