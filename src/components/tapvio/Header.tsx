@@ -123,7 +123,7 @@ function UserMenu({
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link to="/">
+          <Link to="/perfil" search={{ tab: "valoraciones" }}>
             <UserIcon className="mr-2 h-4 w-4" /> Mi perfil
           </Link>
         </DropdownMenuItem>
