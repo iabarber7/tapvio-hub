@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import { categoryIcon } from "@/lib/categoryIcons";
 import heroArt from "@/assets/tapvio-hero.png.asset.json";
 
 
