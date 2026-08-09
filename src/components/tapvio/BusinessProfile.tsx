@@ -64,6 +64,9 @@ export function BusinessProfile({
               </Badge>
             ) : null}
           </div>
+          <div className="ml-auto pb-2">
+            <FavoriteButton businessId={business.id} size={20} className="h-10 w-10" />
+          </div>
         </div>
 
         <h1 className="mt-4 text-3xl font-bold md:text-4xl">{business.name}</h1>
