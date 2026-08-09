@@ -87,6 +87,7 @@ export type Database = {
           cover_url: string | null
           created_at: string
           description: string | null
+          email: string | null
           facebook: string | null
           google_review_url: string | null
           id: string
@@ -97,6 +98,8 @@ export type Database = {
           name: string
           owner_id: string | null
           phone: string | null
+          postal_code: string | null
+          province: string | null
           slug: string
           status: string
           total_reviews: number
@@ -110,6 +113,7 @@ export type Database = {
           cover_url?: string | null
           created_at?: string
           description?: string | null
+          email?: string | null
           facebook?: string | null
           google_review_url?: string | null
           id?: string
@@ -120,6 +124,8 @@ export type Database = {
           name: string
           owner_id?: string | null
           phone?: string | null
+          postal_code?: string | null
+          province?: string | null
           slug: string
           status?: string
           total_reviews?: number
@@ -133,6 +139,7 @@ export type Database = {
           cover_url?: string | null
           created_at?: string
           description?: string | null
+          email?: string | null
           facebook?: string | null
           google_review_url?: string | null
           id?: string
@@ -143,6 +150,8 @@ export type Database = {
           name?: string
           owner_id?: string | null
           phone?: string | null
+          postal_code?: string | null
+          province?: string | null
           slug?: string
           status?: string
           total_reviews?: number
