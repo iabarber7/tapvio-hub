@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { StarRating } from "./StarRating";
 import { ReviewModal } from "./ReviewModal";
+import { FavoriteButton } from "./FavoriteButton";
 import {
   businessDetailsQuery,
   isOpenNow,
