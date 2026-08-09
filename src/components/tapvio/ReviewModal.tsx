@@ -29,8 +29,8 @@ export function ReviewModal({
   onOpenChange: (v: boolean) => void;
   businessId: string;
   businessName: string;
-  googleReviewUrl?: string | null;
-  deviceId?: string | null;
+  googleReviewUrl?: string | null | undefined;
+  deviceId?: string | null | undefined;
   onSubmitted?: () => void;
 }) {
   const [rating, setRating] = useState(0);
