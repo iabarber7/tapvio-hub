@@ -16,6 +16,7 @@ import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
 import { Route as BusinessConfiguracionRouteImport } from './routes/business.configuracion'
 import { Route as BusinessDispositivosRouteImport } from './routes/business.dispositivos'
@@ -58,6 +59,11 @@ const RegistroRoute = RegistroRouteImport.update({
   path: '/registro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const BusinessIndexRoute = BusinessIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,7 +97,7 @@ const TDeviceCodeRoute = TDeviceCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
@@ -102,11 +108,11 @@ export interface FileRoutesByFullPath {
   '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/admin/': typeof AdminIndexRoute
   '/business/': typeof BusinessIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
@@ -116,12 +122,13 @@ export interface FileRoutesByTo {
   '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/admin': typeof AdminIndexRoute
   '/business': typeof BusinessIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/business': typeof BusinessRouteWithChildren
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
@@ -132,6 +139,7 @@ export interface FileRoutesById {
   '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/admin/': typeof AdminIndexRoute
   '/business/': typeof BusinessIndexRoute
 }
 export interface FileRouteTypes {
@@ -149,11 +157,11 @@ export interface FileRouteTypes {
     | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/admin/'
     | '/business/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/explorar'
     | '/login'
     | '/perfil'
@@ -163,6 +171,7 @@ export interface FileRouteTypes {
     | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/admin'
     | '/business'
   id:
     | '__root__'
@@ -178,12 +187,13 @@ export interface FileRouteTypes {
     | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/admin/'
     | '/business/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BusinessRoute: typeof BusinessRouteWithChildren
   ExplorarRoute: typeof ExplorarRoute
   LoginRoute: typeof LoginRoute
@@ -244,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/business/': {
       id: '/business/'
       path: '/'
@@ -289,6 +306,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface BusinessRouteChildren {
   BusinessConfiguracionRoute: typeof BusinessConfiguracionRoute
   BusinessDispositivosRoute: typeof BusinessDispositivosRoute
@@ -309,7 +336,7 @@ const BusinessRouteWithChildren = BusinessRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   BusinessRoute: BusinessRouteWithChildren,
   ExplorarRoute: ExplorarRoute,
   LoginRoute: LoginRoute,
