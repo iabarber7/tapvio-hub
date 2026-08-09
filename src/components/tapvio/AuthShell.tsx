@@ -16,10 +16,7 @@ export function AuthShell({
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-secondary/40 px-4 py-12">
       <Link to="/" className="mb-6 flex items-center gap-2">
-        <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-gradient text-base font-bold text-primary-foreground">
-          T
-        </span>
-        <span className="text-xl font-bold tracking-tight">TAPVIO</span>
+        <img src={tapvioLogo.url} alt="TAPVIO" className="h-16 w-auto object-contain" />
       </Link>
 
       <div className="w-full max-w-md rounded-2xl border border-border/70 bg-card p-6 shadow-card sm:p-8">
