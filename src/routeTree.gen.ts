@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminNegociosRouteImport } from './routes/admin.negocios'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
 import { Route as BusinessConfiguracionRouteImport } from './routes/business.configuracion'
 import { Route as BusinessDispositivosRouteImport } from './routes/business.dispositivos'
@@ -64,6 +65,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminNegociosRoute = AdminNegociosRouteImport.update({
+  id: '/negocios',
+  path: '/negocios',
+  getParentRoute: () => AdminRoute,
+} as any)
 const BusinessIndexRoute = BusinessIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/negocios': typeof AdminNegociosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
   '/business/dispositivos': typeof BusinessDispositivosRoute
   '/business/suscripcion': typeof BusinessSuscripcionRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/negocios': typeof AdminNegociosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
   '/business/dispositivos': typeof BusinessDispositivosRoute
   '/business/suscripcion': typeof BusinessSuscripcionRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/negocios': typeof AdminNegociosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
   '/business/dispositivos': typeof BusinessDispositivosRoute
   '/business/suscripcion': typeof BusinessSuscripcionRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/negocios'
     | '/business/configuracion'
     | '/business/dispositivos'
     | '/business/suscripcion'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/negocios'
     | '/business/configuracion'
     | '/business/dispositivos'
     | '/business/suscripcion'
@@ -182,6 +193,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/negocios'
     | '/business/configuracion'
     | '/business/dispositivos'
     | '/business/suscripcion'
@@ -261,6 +273,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/negocios': {
+      id: '/admin/negocios'
+      path: '/negocios'
+      fullPath: '/admin/negocios'
+      preLoaderRoute: typeof AdminNegociosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/business/': {
       id: '/business/'
       path: '/'
@@ -307,10 +326,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminNegociosRoute: typeof AdminNegociosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminNegociosRoute: AdminNegociosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
