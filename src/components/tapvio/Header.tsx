@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, Store, User as UserIcon } from "lucide-react";
+import { LogOut, ShieldCheck, Store, User as UserIcon } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 export function Header() {
