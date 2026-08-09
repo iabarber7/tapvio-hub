@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { StarRating } from "./StarRating";
 import { ReviewModal } from "./ReviewModal";
+import { FavoriteButton } from "./FavoriteButton";
 import {
   businessDetailsQuery,
   isOpenNow,
@@ -63,6 +64,9 @@ export function BusinessProfile({
                 {business.categories.icon} {business.categories.name}
               </Badge>
             ) : null}
+          </div>
+          <div className="ml-auto pb-2">
+            <FavoriteButton businessId={business.id} size={20} className="h-10 w-10" />
           </div>
         </div>
 

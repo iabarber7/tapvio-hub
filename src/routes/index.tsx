@@ -41,7 +41,7 @@ function Index() {
       <section className="relative overflow-hidden bg-hero-gradient text-navy-foreground">
         <div className="mx-auto max-w-6xl px-4 py-16 text-center md:py-24">
           <span className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/20 bg-navy-foreground/10 px-3 py-1 text-xs font-medium">
-            <Nfc size={14} /> Conecta. Fideliza. Crece.
+            <Nfc size={14} /> {"Conecta. Fideliza. Crece."}
           </span>
           <h1 className="mt-5 text-4xl font-bold leading-tight md:text-6xl">
             Descubre. Valora. Conecta.
