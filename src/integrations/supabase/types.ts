@@ -14,16 +14,493 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      business_hours: {
+        Row: {
+          business_id: string
+          close_time: string | null
+          day_of_week: number
+          id: string
+          is_closed: boolean
+          open_time: string | null
+        }
+        Insert: {
+          business_id: string
+          close_time?: string | null
+          day_of_week: number
+          id?: string
+          is_closed?: boolean
+          open_time?: string | null
+        }
+        Update: {
+          business_id?: string
+          close_time?: string | null
+          day_of_week?: number
+          id?: string
+          is_closed?: boolean
+          open_time?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_hours_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_photos: {
+        Row: {
+          business_id: string
+          id: string
+          order: number
+          url: string
+        }
+        Insert: {
+          business_id: string
+          id?: string
+          order?: number
+          url: string
+        }
+        Update: {
+          business_id?: string
+          id?: string
+          order?: number
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_photos_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      businesses: {
+        Row: {
+          address: string | null
+          avg_rating: number
+          category_id: string | null
+          city: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          facebook: string | null
+          google_review_url: string | null
+          id: string
+          instagram: string | null
+          lat: number | null
+          lng: number | null
+          logo_url: string | null
+          name: string
+          owner_id: string | null
+          phone: string | null
+          slug: string
+          status: string
+          total_reviews: number
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          avg_rating?: number
+          category_id?: string | null
+          city?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          facebook?: string | null
+          google_review_url?: string | null
+          id?: string
+          instagram?: string | null
+          lat?: number | null
+          lng?: number | null
+          logo_url?: string | null
+          name: string
+          owner_id?: string | null
+          phone?: string | null
+          slug: string
+          status?: string
+          total_reviews?: number
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          avg_rating?: number
+          category_id?: string | null
+          city?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          facebook?: string | null
+          google_review_url?: string | null
+          id?: string
+          instagram?: string | null
+          lat?: number | null
+          lng?: number | null
+          logo_url?: string | null
+          name?: string
+          owner_id?: string | null
+          phone?: string | null
+          slug?: string
+          status?: string
+          total_reviews?: number
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "businesses_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          color: string | null
+          icon: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          color?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          color?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      devices: {
+        Row: {
+          business_id: string | null
+          code: string
+          created_at: string
+          id: string
+          label: string | null
+          status: string
+          total_scans: number
+          type: string
+        }
+        Insert: {
+          business_id?: string | null
+          code: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          status?: string
+          total_scans?: number
+          type?: string
+        }
+        Update: {
+          business_id?: string | null
+          code?: string
+          created_at?: string
+          id?: string
+          label?: string | null
+          status?: string
+          total_scans?: number
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      favorites: {
+        Row: {
+          business_id: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          business_id: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          business_id?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interactions: {
+        Row: {
+          action: string
+          business_id: string | null
+          created_at: string
+          device_id: string | null
+          id: string
+          source: string
+        }
+        Insert: {
+          action?: string
+          business_id?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          source?: string
+        }
+        Update: {
+          action?: string
+          business_id?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interactions_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "interactions_device_id_fkey"
+            columns: ["device_id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          id: string
+          name: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          id: string
+          name?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          id?: string
+          name?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      promotions: {
+        Row: {
+          active: boolean
+          business_id: string
+          description: string | null
+          ends_at: string | null
+          id: string
+          starts_at: string | null
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          business_id: string
+          description?: string | null
+          ends_at?: string | null
+          id?: string
+          starts_at?: string | null
+          title: string
+        }
+        Update: {
+          active?: boolean
+          business_id?: string
+          description?: string | null
+          ends_at?: string | null
+          id?: string
+          starts_at?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "promotions_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      review_photos: {
+        Row: {
+          id: string
+          review_id: string
+          url: string
+        }
+        Insert: {
+          id?: string
+          review_id: string
+          url: string
+        }
+        Update: {
+          id?: string
+          review_id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_photos_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          author_name: string | null
+          business_id: string
+          comment: string | null
+          created_at: string
+          device_id: string | null
+          id: string
+          rating: number
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          author_name?: string | null
+          business_id: string
+          comment?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          rating: number
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          author_name?: string | null
+          business_id?: string
+          comment?: string | null
+          created_at?: string
+          device_id?: string | null
+          id?: string
+          rating?: number
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_device_id_fkey"
+            columns: ["device_id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          business_id: string
+          created_at: string
+          id: string
+          plan: string
+          status: string
+          trial_ends_at: string | null
+        }
+        Insert: {
+          business_id: string
+          created_at?: string
+          id?: string
+          plan?: string
+          status?: string
+          trial_ends_at?: string | null
+        }
+        Update: {
+          business_id?: string
+          created_at?: string
+          id?: string
+          plan?: string
+          status?: string
+          trial_ends_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "user" | "business" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +627,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["user", "business", "admin"],
+    },
   },
 } as const
