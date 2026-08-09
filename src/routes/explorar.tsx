@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import { categoryIcon } from "@/lib/categoryIcons";
+import { cn } from "@/lib/utils";
 
 type ExploreSearch = { categoria?: string | undefined };
 
@@ -80,14 +82,14 @@ function Explore() {
           {list.length} negocios disponibles en Las Palmas de Gran Canaria
         </p>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-card px-3">
-            <Search size={18} className="text-muted-foreground" />
+        <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-search-border bg-search p-2 shadow-lift sm:flex-row">
+          <div className="flex flex-1 items-center gap-2 px-3">
+            <Search size={18} className="text-search-muted" />
             <Input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Buscar por nombre o ciudad"
-              className="border-0 px-0 shadow-none focus-visible:ring-0"
+              className="border-0 bg-transparent px-0 text-search-foreground shadow-none placeholder:text-search-muted focus-visible:ring-0"
             />
           </div>
           <Select
@@ -96,20 +98,20 @@ function Explore() {
               navigate({ search: { categoria: v === "all" ? undefined : v } })
             }
           >
-            <SelectTrigger className="sm:w-52">
+            <SelectTrigger className="border-search-border bg-search text-search-foreground sm:w-52">
               <SelectValue placeholder="Categoría" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">Todas las categorías</SelectItem>
               {categories.data?.map((c) => (
                 <SelectItem key={c.id} value={c.slug}>
-                  {c.icon} {c.name}
+                  {c.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
           <Select value={sort} onValueChange={(v) => setSort(v as typeof sort)}>
-            <SelectTrigger className="sm:w-44">
+            <SelectTrigger className="border-search-border bg-search text-search-foreground sm:w-44">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -119,6 +121,42 @@ function Explore() {
             </SelectContent>
           </Select>
         </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => navigate({ search: {} })}
+            className={cn(
+              "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+              !categoria
+                ? "border-transparent bg-brand-gradient text-primary-foreground"
+                : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground",
+            )}
+          >
+            Todas
+          </button>
+          {categories.data?.map((c) => {
+            const Icon = categoryIcon(c.slug);
+            const active = categoria === c.slug;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => navigate({ search: { categoria: c.slug } })}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                  active
+                    ? "border-transparent bg-brand-gradient text-primary-foreground"
+                    : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground",
+                )}
+              >
+                <Icon size={14} strokeWidth={1.75} />
+                {c.name}
+              </button>
+            );
+          })}
+        </div>
+
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {businesses.isLoading

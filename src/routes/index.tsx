@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { categoriesQuery, businessesQuery } from "@/lib/tapvio";
+import { categoryIcon } from "@/lib/categoryIcons";
 import heroArt from "@/assets/tapvio-hero.png.asset.json";
 
 
@@ -79,15 +80,15 @@ function Index() {
               ))}
             </div>
 
-            <div className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-navy-foreground/10 bg-navy-foreground/5 p-2 backdrop-blur sm:flex-row">
+            <div className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-search-border bg-search p-2 shadow-lift sm:flex-row">
               <div className="flex flex-1 items-center gap-2 px-3">
-                <Search size={18} className="text-navy-foreground/50" />
+                <Search size={18} className="text-search-muted" />
                 <Input
                   placeholder="Busca un restaurante, café, hotel…"
-                  className="border-0 px-0 text-navy-foreground shadow-none placeholder:text-navy-foreground/40 focus-visible:ring-0"
+                  className="border-0 bg-transparent px-0 text-search-foreground shadow-none placeholder:text-search-muted focus-visible:ring-0"
                 />
               </div>
-              <div className="hidden items-center gap-2 border-l border-navy-foreground/10 px-3 text-sm text-navy-foreground/50 sm:flex">
+              <div className="hidden items-center gap-2 border-l border-search-border px-3 text-sm text-search-muted sm:flex">
                 <MapPin size={16} /> Las Palmas GC
               </div>
               <Link to="/explorar">
@@ -119,17 +120,22 @@ function Index() {
               ? Array.from({ length: 9 }).map((_, i) => (
                   <Skeleton key={i} className="h-24 rounded-2xl" />
                 ))
-              : categories.data?.map((c) => (
-                  <Link
-                    key={c.id}
-                    to="/explorar"
-                    search={{ categoria: c.slug }}
-                    className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-card p-4 text-center shadow-card transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lift"
-                  >
-                    <span className="text-2xl">{c.icon}</span>
-                    <span className="text-xs font-medium leading-tight">{c.name}</span>
-                  </Link>
-                ))}
+              : categories.data?.map((c) => {
+                  const Icon = categoryIcon(c.slug);
+                  return (
+                    <Link
+                      key={c.id}
+                      to="/explorar"
+                      search={{ categoria: c.slug }}
+                      className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-card p-4 text-center shadow-card transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lift"
+                    >
+                      <span className="flex size-10 items-center justify-center rounded-xl bg-brand-gradient/10 bg-secondary text-primary transition-colors group-hover:bg-brand-gradient group-hover:text-primary-foreground">
+                        <Icon size={20} strokeWidth={1.75} />
+                      </span>
+                      <span className="text-xs font-medium leading-tight">{c.name}</span>
+                    </Link>
+                  );
+                })}
           </div>
         </section>
 
