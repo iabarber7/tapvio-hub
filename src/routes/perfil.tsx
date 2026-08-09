@@ -28,7 +28,7 @@ import type { Business } from "@/lib/tapvio";
 export const Route = createFileRoute("/perfil")({
   ssr: false,
   validateSearch: (search: Record<string, unknown>) => ({
-    tab: search.tab === "favoritos" ? "favoritos" : "valoraciones",
+    tab: search['tab'] === "favoritos" ? "favoritos" : "valoraciones",
   }),
   head: () => ({
     meta: [
@@ -145,7 +145,7 @@ function PerfilPage() {
     );
   }
 
-  const name = profile.data?.name ?? (user.user_metadata?.name as string | undefined) ?? null;
+  const name = profile.data?.name ?? (user.user_metadata?.['name'] as string | undefined) ?? null;
 
   return (
     <div className="min-h-screen pb-16 md:pb-0">

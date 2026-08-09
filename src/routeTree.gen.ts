@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as NegocioSlugRouteImport } from './routes/negocio.$slug'
 import { Route as TDeviceCodeRouteImport } from './routes/t.$deviceCode'
@@ -29,6 +30,11 @@ const ExplorarRoute = ExplorarRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegistroRoute = RegistroRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
+  '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
+  '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
+  '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/explorar'
     | '/login'
+    | '/perfil'
     | '/registro'
     | '/negocio/$slug'
     | '/t/$deviceCode'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/explorar'
     | '/login'
+    | '/perfil'
     | '/registro'
     | '/negocio/$slug'
     | '/t/$deviceCode'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/explorar'
     | '/login'
+    | '/perfil'
     | '/registro'
     | '/negocio/$slug'
     | '/t/$deviceCode'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExplorarRoute: typeof ExplorarRoute
   LoginRoute: typeof LoginRoute
+  PerfilRoute: typeof PerfilRoute
   RegistroRoute: typeof RegistroRoute
   NegocioSlugRoute: typeof NegocioSlugRoute
   TDeviceCodeRoute: typeof TDeviceCodeRoute
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/registro': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExplorarRoute: ExplorarRoute,
   LoginRoute: LoginRoute,
+  PerfilRoute: PerfilRoute,
   RegistroRoute: RegistroRoute,
   NegocioSlugRoute: NegocioSlugRoute,
   TDeviceCodeRoute: TDeviceCodeRoute,
@@ -166,13 +187,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
