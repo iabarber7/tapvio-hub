@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as NegocioSlugRouteImport } from './routes/negocio.$slug'
 import { Route as TDeviceCodeRouteImport } from './routes/t.$deviceCode'
 
@@ -22,6 +24,16 @@ const IndexRoute = IndexRouteImport.update({
 const ExplorarRoute = ExplorarRouteImport.update({
   id: '/explorar',
   path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NegocioSlugRoute = NegocioSlugRouteImport.update({
@@ -38,12 +50,16 @@ const TDeviceCodeRoute = TDeviceCodeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
 }
@@ -51,20 +67,43 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
+  fullPaths:
+    | '/'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/negocio/$slug'
+    | '/t/$deviceCode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
-  id: '__root__' | '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
+  to:
+    | '/'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/negocio/$slug'
+    | '/t/$deviceCode'
+  id:
+    | '__root__'
+    | '/'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/negocio/$slug'
+    | '/t/$deviceCode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExplorarRoute: typeof ExplorarRoute
+  LoginRoute: typeof LoginRoute
+  RegistroRoute: typeof RegistroRoute
   NegocioSlugRoute: typeof NegocioSlugRoute
   TDeviceCodeRoute: typeof TDeviceCodeRoute
 }
@@ -83,6 +122,20 @@ declare module '@tanstack/react-router' {
       path: '/explorar'
       fullPath: '/explorar'
       preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/negocio/$slug': {
@@ -105,19 +158,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExplorarRoute: ExplorarRoute,
+  LoginRoute: LoginRoute,
+  RegistroRoute: RegistroRoute,
   NegocioSlugRoute: NegocioSlugRoute,
   TDeviceCodeRoute: TDeviceCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
