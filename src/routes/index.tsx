@@ -80,15 +80,15 @@ function Index() {
               ))}
             </div>
 
-            <div className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-navy-foreground/10 bg-navy-foreground/5 p-2 backdrop-blur sm:flex-row">
+            <div className="mt-9 flex max-w-xl flex-col gap-2 rounded-2xl border border-search-border bg-search p-2 shadow-lift sm:flex-row">
               <div className="flex flex-1 items-center gap-2 px-3">
-                <Search size={18} className="text-navy-foreground/50" />
+                <Search size={18} className="text-search-muted" />
                 <Input
                   placeholder="Busca un restaurante, café, hotel…"
-                  className="border-0 px-0 text-navy-foreground shadow-none placeholder:text-navy-foreground/40 focus-visible:ring-0"
+                  className="border-0 bg-transparent px-0 text-search-foreground shadow-none placeholder:text-search-muted focus-visible:ring-0"
                 />
               </div>
-              <div className="hidden items-center gap-2 border-l border-navy-foreground/10 px-3 text-sm text-navy-foreground/50 sm:flex">
+              <div className="hidden items-center gap-2 border-l border-search-border px-3 text-sm text-search-muted sm:flex">
                 <MapPin size={16} /> Las Palmas GC
               </div>
               <Link to="/explorar">
