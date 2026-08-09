@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminDispositivosRouteImport } from './routes/admin.dispositivos'
 import { Route as AdminNegociosRouteImport } from './routes/admin.negocios'
 import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
 import { Route as BusinessIndexRouteImport } from './routes/business.index'
@@ -64,6 +65,11 @@ const RegistroRoute = RegistroRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDispositivosRoute = AdminDispositivosRouteImport.update({
+  id: '/dispositivos',
+  path: '/dispositivos',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminNegociosRoute = AdminNegociosRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/dispositivos': typeof AdminDispositivosRoute
   '/admin/negocios': typeof AdminNegociosRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/dispositivos': typeof AdminDispositivosRoute
   '/admin/negocios': typeof AdminNegociosRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/admin/dispositivos': typeof AdminDispositivosRoute
   '/admin/negocios': typeof AdminNegociosRoute
   '/admin/usuarios': typeof AdminUsuariosRoute
   '/business/configuracion': typeof BusinessConfiguracionRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/dispositivos'
     | '/admin/negocios'
     | '/admin/usuarios'
     | '/business/configuracion'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/dispositivos'
     | '/admin/negocios'
     | '/admin/usuarios'
     | '/business/configuracion'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/admin/dispositivos'
     | '/admin/negocios'
     | '/admin/usuarios'
     | '/business/configuracion'
@@ -285,6 +297,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/dispositivos': {
+      id: '/admin/dispositivos'
+      path: '/dispositivos'
+      fullPath: '/admin/dispositivos'
+      preLoaderRoute: typeof AdminDispositivosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/negocios': {
       id: '/admin/negocios'
       path: '/negocios'
@@ -345,12 +364,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminDispositivosRoute: typeof AdminDispositivosRoute
   AdminNegociosRoute: typeof AdminNegociosRoute
   AdminUsuariosRoute: typeof AdminUsuariosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminDispositivosRoute: AdminDispositivosRoute,
   AdminNegociosRoute: AdminNegociosRoute,
   AdminUsuariosRoute: AdminUsuariosRoute,
   AdminIndexRoute: AdminIndexRoute,
