@@ -131,7 +131,7 @@ function DevicesPage() {
       ) : (
         <ul className="space-y-3">
           {list.map((device) => {
-            const type = TYPE_LABELS[device.type] ?? TYPE_LABELS.sticker;
+            const type = TYPE_LABELS[device.type] ?? { icon: "🏷️", name: "Sticker" };
             const active = device.status === "active";
             return (
               <li
