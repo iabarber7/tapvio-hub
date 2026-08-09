@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as NegocioSlugRouteImport } from './routes/negocio.$slug'
+import { Route as TDeviceCodeRouteImport } from './routes/t.$deviceCode'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const NegocioSlugRoute = NegocioSlugRouteImport.update({
   path: '/negocio/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TDeviceCodeRoute = TDeviceCodeRouteImport.update({
+  id: '/t/$deviceCode',
+  path: '/t/$deviceCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/negocio/$slug': typeof NegocioSlugRoute
+  '/t/$deviceCode': typeof TDeviceCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/negocio/$slug': typeof NegocioSlugRoute
+  '/t/$deviceCode': typeof TDeviceCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explorar': typeof ExplorarRoute
   '/negocio/$slug': typeof NegocioSlugRoute
+  '/t/$deviceCode': typeof TDeviceCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explorar' | '/negocio/$slug'
+  fullPaths: '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explorar' | '/negocio/$slug'
-  id: '__root__' | '/' | '/explorar' | '/negocio/$slug'
+  to: '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
+  id: '__root__' | '/' | '/explorar' | '/negocio/$slug' | '/t/$deviceCode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExplorarRoute: typeof ExplorarRoute
   NegocioSlugRoute: typeof NegocioSlugRoute
+  TDeviceCodeRoute: typeof TDeviceCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NegocioSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/t/$deviceCode': {
+      id: '/t/$deviceCode'
+      path: '/t/$deviceCode'
+      fullPath: '/t/$deviceCode'
+      preLoaderRoute: typeof TDeviceCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExplorarRoute: ExplorarRoute,
   NegocioSlugRoute: NegocioSlugRoute,
+  TDeviceCodeRoute: TDeviceCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
