@@ -15,6 +15,10 @@ import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as BusinessIndexRouteImport } from './routes/business.index'
+import { Route as BusinessConfiguracionRouteImport } from './routes/business.configuracion'
+import { Route as BusinessDispositivosRouteImport } from './routes/business.dispositivos'
+import { Route as BusinessSuscripcionRouteImport } from './routes/business.suscripcion'
 import { Route as NegocioSlugRouteImport } from './routes/negocio.$slug'
 import { Route as TDeviceCodeRouteImport } from './routes/t.$deviceCode'
 
@@ -48,6 +52,26 @@ const RegistroRoute = RegistroRouteImport.update({
   path: '/registro',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BusinessIndexRoute = BusinessIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessConfiguracionRoute = BusinessConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessDispositivosRoute = BusinessDispositivosRouteImport.update({
+  id: '/dispositivos',
+  path: '/dispositivos',
+  getParentRoute: () => BusinessRoute,
+} as any)
+const BusinessSuscripcionRoute = BusinessSuscripcionRouteImport.update({
+  id: '/suscripcion',
+  path: '/suscripcion',
+  getParentRoute: () => BusinessRoute,
+} as any)
 const NegocioSlugRoute = NegocioSlugRouteImport.update({
   id: '/negocio/$slug',
   path: '/negocio/$slug',
@@ -61,34 +85,45 @@ const TDeviceCodeRoute = TDeviceCodeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/business': typeof BusinessRoute
+  '/business': typeof BusinessRouteWithChildren
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/business/configuracion': typeof BusinessConfiguracionRoute
+  '/business/dispositivos': typeof BusinessDispositivosRoute
+  '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/business/': typeof BusinessIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/business': typeof BusinessRoute
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/business/configuracion': typeof BusinessConfiguracionRoute
+  '/business/dispositivos': typeof BusinessDispositivosRoute
+  '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/business': typeof BusinessIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/business': typeof BusinessRoute
+  '/business': typeof BusinessRouteWithChildren
   '/explorar': typeof ExplorarRoute
   '/login': typeof LoginRoute
   '/perfil': typeof PerfilRoute
   '/registro': typeof RegistroRoute
+  '/business/configuracion': typeof BusinessConfiguracionRoute
+  '/business/dispositivos': typeof BusinessDispositivosRoute
+  '/business/suscripcion': typeof BusinessSuscripcionRoute
   '/negocio/$slug': typeof NegocioSlugRoute
   '/t/$deviceCode': typeof TDeviceCodeRoute
+  '/business/': typeof BusinessIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,18 +134,25 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/business/configuracion'
+    | '/business/dispositivos'
+    | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/business/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/business'
     | '/explorar'
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/business/configuracion'
+    | '/business/dispositivos'
+    | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/business'
   id:
     | '__root__'
     | '/'
@@ -119,13 +161,17 @@ export interface FileRouteTypes {
     | '/login'
     | '/perfil'
     | '/registro'
+    | '/business/configuracion'
+    | '/business/dispositivos'
+    | '/business/suscripcion'
     | '/negocio/$slug'
     | '/t/$deviceCode'
+    | '/business/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BusinessRoute: typeof BusinessRoute
+  BusinessRoute: typeof BusinessRouteWithChildren
   ExplorarRoute: typeof ExplorarRoute
   LoginRoute: typeof LoginRoute
   PerfilRoute: typeof PerfilRoute
@@ -178,6 +224,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegistroRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/business/': {
+      id: '/business/'
+      path: '/'
+      fullPath: '/business/'
+      preLoaderRoute: typeof BusinessIndexRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/configuracion': {
+      id: '/business/configuracion'
+      path: '/configuracion'
+      fullPath: '/business/configuracion'
+      preLoaderRoute: typeof BusinessConfiguracionRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/dispositivos': {
+      id: '/business/dispositivos'
+      path: '/dispositivos'
+      fullPath: '/business/dispositivos'
+      preLoaderRoute: typeof BusinessDispositivosRouteImport
+      parentRoute: typeof BusinessRoute
+    }
+    '/business/suscripcion': {
+      id: '/business/suscripcion'
+      path: '/suscripcion'
+      fullPath: '/business/suscripcion'
+      preLoaderRoute: typeof BusinessSuscripcionRouteImport
+      parentRoute: typeof BusinessRoute
+    }
     '/negocio/$slug': {
       id: '/negocio/$slug'
       path: '/negocio/$slug'
@@ -195,9 +269,27 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BusinessRouteChildren {
+  BusinessConfiguracionRoute: typeof BusinessConfiguracionRoute
+  BusinessDispositivosRoute: typeof BusinessDispositivosRoute
+  BusinessSuscripcionRoute: typeof BusinessSuscripcionRoute
+  BusinessIndexRoute: typeof BusinessIndexRoute
+}
+
+const BusinessRouteChildren: BusinessRouteChildren = {
+  BusinessConfiguracionRoute: BusinessConfiguracionRoute,
+  BusinessDispositivosRoute: BusinessDispositivosRoute,
+  BusinessSuscripcionRoute: BusinessSuscripcionRoute,
+  BusinessIndexRoute: BusinessIndexRoute,
+}
+
+const BusinessRouteWithChildren = BusinessRoute._addFileChildren(
+  BusinessRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BusinessRoute: BusinessRoute,
+  BusinessRoute: BusinessRouteWithChildren,
   ExplorarRoute: ExplorarRoute,
   LoginRoute: LoginRoute,
   PerfilRoute: PerfilRoute,
@@ -208,13 +300,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
